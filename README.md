@@ -7,4 +7,4 @@ there are 4 fuctions
 3. upload
 4. download
 
-etc) webpage image view made by php 
+etc) view : webpage image view made by php 
