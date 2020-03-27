@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>download photo</title>
+</head>
+<body>
+	<form method="post" action="download.php">
+<?php
+
+ini_set('display_errors',1);
+
+
+$file = array();	
+
+if($handle = opendir('./upload')){
+	while(false !== ($entry = readdir($handle))){
+		if($entry!="." && $entry!=".."){
+			$fpath = './upload/'.$entry;
+			$file[filemtime($fpath)]=$entry;
+		}
+	}
+	closedir($handle);
+}
+
+
+krsort($file);
+
+$i=0;
+foreach($file as $key=>$val){
+	if($i<8){
+		//echo $key." ".$val."<br>";
+		$rval=$val;
+		$val = "./upload/".$val;
+		echo "<input type='radio' name='img' value=".$rval.">".$rval."<br>";
+		echo "<p><img src=".$val." alt='이미지묘사 내용' width='300' height='200'/></p><br/>";
+		$i++;
+	}else{
+		break;
+	}
+}
+
+?>
+		<p><input type="submit" value="download"></p>
+	</form>
+</body>
+</html>
